@@ -15,9 +15,11 @@ class Elevator{
         this.queue = [];
         this.building = document.getElementById("building");
         this.floorIndicator = document.getElementById("floor-indicator");
-        this.movingStatus = false;
         this.passingBy = 1;
         this.standByTime = 1000;
+        this.doors = document.getElementById("doors");
+        this.doorLeft = document.getElementById("door-left");
+        this.doorRight = document.getElementById("door-right");
     }
 
     //GETTERS
@@ -44,7 +46,8 @@ class Elevator{
         //set css for buidling to move
         this.building.style.transform = "translateY(" + this.elevatorY + "em)";
         this.building.style.transitionDuration = time + "ms";
-
+        
+        
         //add or subtract to floor indicator
         let floorVariable = (distance > 0) ? 1 : -1;
         let floorsMoved = Math.abs(head-this.currentFloor);
@@ -70,34 +73,32 @@ class Elevator{
             console.log("New current floor is: " + this.currentFloor)
             //undo highlight for arrival floor
             document.getElementById("button"+this.currentFloor).style.backgroundColor =  "";
+            this.openDoors();
     }
     moveElevator(){
         if (this.queue.length !== 0){
-            this.movingStatus = true;
             let head = this.queue[0];
+
+            console.log('moving from ' + this.currentFloor + " to : " + head);
 
             let calculatedMovement = this.calculateYMovement(head);
             let calculatedTime = this.calculateTransitionTime(head);
 
-            this.startDirectionSignaling(calculatedMovement, calculatedTime);
-            this.startTransition(calculatedMovement, calculatedTime, head);
-            
+            console.log(calculatedMovement + ' em ' + calculatedTime + 'ms to ' + head)
+
+            setTimeout(() => {
+                this.startDirectionSignaling(calculatedMovement, calculatedTime);
+                this.closeDoors();
+                this.startTransition(calculatedMovement, calculatedTime, head);
+            }, this.standByTime)
             setTimeout(() => {
                 //after transition time, set arrival
                 this.arrive();
-                this.openDoors();
-                this.updateDirectionSignaling()
+                if (this.queue.length !== 0){
+                    this.moveElevator();
+                }
 
-                setTimeout(() => {
-                    //once completed, check if queue is empty, if so update status, else run the next in queue
-                    this.closeDoors()
-                    if (this.queue.length !== 0){
-                        this.moveElevator();
-                    }
-
-                }, this.standByTime)
-                
-              }, calculatedTime + this.standByTime)
+              }, calculatedTime + this.standByTime )
 
         }
     }
@@ -107,33 +108,28 @@ class Elevator{
         let indicator = document.getElementById(indicatorId)
         indicator.style.opacity = 1;
 
-
         setTimeout(() => {
             //after transition time, set indicator off
             indicator.style.opacity = 0.3;
             
-          }, time + this.standByTime)
-    }
-    updateDirectionSignaling(){
-        //upon arrival, update indicator for 1 second for other users entering
-        let nextMovement = (this.queue[0]-this.currentFloor);
-        if (nextMovement !== 0){
-            let indicatorId = (nextMovement > 0) ? "green" : "red";
-            let indicator = document.getElementById(indicatorId)
-            indicator.style.opacity = 1;
-
-            setTimeout(() => {
-                //after transition time, set indicator off
-                indicator.style.opacity = 0.3;
-                
-            }, this.standByTime )
-        }
+          }, time)
     }
     openDoors(){
         this.floorIndicator.style.color = "yellow";
+        this.doors.style.opacity = 1;
+        this.doorLeft.style.transform = "translateX(-50%)";
+        this.doorLeft.style.transitionDuration = 200 + "ms";
+        this.doorRight.style.transform = "translateX(50%)";
+        this.doorRight.style.transitionDuration = 200 + "ms";
+
     }
     closeDoors(){
         this.floorIndicator.style.color = "white";
+        this.doors.style.opacity = 0.3;
+        this.doorLeft.style.transform = "translateX(0)";
+        this.doorLeft.style.transitionDuration = 100 + "ms";
+        this.doorRight.style.transform = "translateX(0)";
+        this.doorRight.style.transitionDuration = 100 + "ms";
     }
 
 }

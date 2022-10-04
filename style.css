@@ -13,6 +13,8 @@ body {
     height: 160em;
     transition-duration: 3s;
     animation-timing-function: ease;
+    height: 100%;
+    margin: 0;
 }
 
 .floor {
@@ -26,6 +28,39 @@ body {
     text-align: center;
     font-size: 3em;
     color: aliceblue;
+}
+
+
+/* DOORS */
+.doors{
+    height: 26em;
+    width: 30%;
+    position: absolute;
+    margin: auto;
+    background-color: silver;
+    top: 20em;
+    left: 35%;
+    display: flex;
+    border: 3px solid gray;
+    overflow: hidden;
+}
+
+.door-right{
+    border-right: 1em solid darkgray;
+    border-left: 0.5em solid darkgray;
+    border-top: 1em solid darkgray;
+    width: 50%;
+    overflow: hidden;
+    background-color: silver;
+}
+
+.door-left{
+    width: 50%;
+    border-right: 0.5em solid darkgray;
+    border-left: 1em solid darkgray;
+    border-top: 1em solid darkgray;
+    overflow: hidden;
+    background-color: silver;
 }
 
 
