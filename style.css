@@ -1,0 +1,112 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: aquamarine;
+}
+
+/* BUILDING */
+#building {
+    height: 160em;
+    transition-duration: 3s;
+    animation-timing-function: ease;
+}
+
+.floor {
+    background-color: maroon;
+    border-top: 1em solid black;
+    padding-top: 2em;
+    height: 40em;
+}
+
+.floor-number > h2 {
+    text-align: center;
+    font-size: 3em;
+    color: aliceblue;
+}
+
+/* CONTROL PANEL */
+#panel {
+    height: 16em;
+    width: 12em;
+    background-color: gainsboro;
+    position: absolute;
+    top: 14em;
+    left: 4em;
+    border: solid 1px black;
+    border-radius: 4px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.screen{
+    display: flex;
+    background-color: black;
+    margin: 1em;
+    min-height: 4em;
+    border-radius: 4px;
+}
+
+.screen-left {
+    height: 7em;
+    width: 60%;
+}
+
+
+#floor-indicator{
+    color: white;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+.screen-right {
+    height: 7em;
+    width: 40%;
+}
+
+.green{
+    height: 2em;
+    width: 2em;
+    background-color: green;
+    margin: auto;
+    margin-bottom: .5em;
+    margin-top: 1em;
+    opacity: 0.3;
+}
+
+.red{
+    height: 2em;
+    width: 2em;
+    background-color: red;
+    margin: auto;
+    margin-top: .5em;
+    margin-bottom: 1em;
+    opacity: 0.3;
+}
+
+
+
+
+.buttons{
+    margin-top: 1em;
+    margin: 1.25em;
+    display: flex;
+}
+
+.button{
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: .6em;
+    margin-bottom: 1em;
+    height: 1em;
+    width: 1em;
+    text-align: center;
+}
+
+.buttons-even{
+    margin-left: auto;
+    margin-right: 0;
+}
+
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <head>
+        <meta name="description" content="Elevator Technical Challenge for Cherry">
+        <title>Cherry Elevator</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="building">
+            <div class="floor four">
+                <div class="floor-number">
+                    <h2>4</h2>
+                </div>
+            </div>
+            <div class="floor three">
+                <div class="floor-number">
+                    <h2>3</h2>
+                </div>
+            </div>
+            <div class="floor two">
+                <div class="floor-number">
+                    <h2>2</h2>
+                </div>
+            </div>
+            <div class="floor one">
+                <div class="floor-number">
+                    <h2>1</h2>
+                </div>
+            </div>
+        </div>
+
+        <div id="panel" class="panel">
+            <div class="screen">
+                <div class="screen-left">
+                    <div id="indicator">
+                        <h2 id="floor-indicator">1</h2>
+                    </div>
+                </div>
+                <div class="screen-right">
+                    <div class="direction-indicator green" id="green"></div>
+                    <div class="direction-indicator red" id="red"></div>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="buttons-odd">
+                    <div class="button" id="button3" onclick="toQueue(3)">3</div>
+                    <div class="button" id="button1" onclick="toQueue(1)">1</div>
+                </div>
+                <div class="buttons-even">
+                    <div class="button" id="button4" onclick="toQueue(4)">4</div>
+                    <div class="button" id="button2" onclick="toQueue(2)">2</div>
+                </div>
+                
+            </div>
+            
+        </div>
+        <script src="App.js"></script> 
+    </body>
+
+</html>
