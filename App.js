@@ -1,5 +1,11 @@
+// Alex Laris
+// Elevator Technical Challenge for With Cherry
+// 10-04-2022
+
+//Start at the bottom floor
 document.body.scrollTop=document.body.scrollHeight;
 
+// *Start of Class* //
 class Elevator{
     constructor(){
         this.currentFloor = 1;
@@ -11,6 +17,7 @@ class Elevator{
         this.floorIndicator = document.getElementById("floor-indicator");
         this.movingStatus = false;
         this.passingBy = 1;
+        this.standByTime = 1000;
     }
 
     //GETTERS
@@ -40,11 +47,9 @@ class Elevator{
 
         //add or subtract to floor indicator
         let floorVariable = (distance > 0) ? 1 : -1;
-        console.log('floorVariable = ' + floorVariable);
         let floorsMoved = Math.abs(head-this.currentFloor);
-        console.log('floorsmoved = ' + floorsMoved)
-        console.log('starting on: ' + this.currentFloor)
 
+        //set this to "that" to hold reference inside interval
         let that = this;
         let count = 0;
         let interval = setInterval(function(){
@@ -55,7 +60,6 @@ class Elevator{
             }
 
             that.passingBy = that.passingBy + floorVariable;
-            console.log(that.passingBy + ' ' + floorVariable)
             that.floorIndicator.textContent = that.passingBy;
 
         }, 1900)   
@@ -73,27 +77,27 @@ class Elevator{
             let head = this.queue[0];
 
             let calculatedMovement = this.calculateYMovement(head);
-            let calculatedTime = this.calculateTransitionTime(head)
+            let calculatedTime = this.calculateTransitionTime(head);
 
-            this.startTransition(calculatedMovement, calculatedTime, head);
             this.startDirectionSignaling(calculatedMovement, calculatedTime);
+            this.startTransition(calculatedMovement, calculatedTime, head);
             
             setTimeout(() => {
                 //after transition time, set arrival
                 this.arrive();
-                this.openDoors()
+                this.openDoors();
+                this.updateDirectionSignaling()
 
                 setTimeout(() => {
                     //once completed, check if queue is empty, if so update status, else run the next in queue
-                    if (this.queue.length !== 0){
-                        this.closeDoors()
-                        this.moveElevator()
-                    }
                     this.closeDoors()
+                    if (this.queue.length !== 0){
+                        this.moveElevator();
+                    }
 
-                }, 1000)
+                }, this.standByTime)
                 
-              }, calculatedTime)
+              }, calculatedTime + this.standByTime)
 
         }
     }
@@ -103,11 +107,27 @@ class Elevator{
         let indicator = document.getElementById(indicatorId)
         indicator.style.opacity = 1;
 
+
         setTimeout(() => {
             //after transition time, set indicator off
             indicator.style.opacity = 0.3;
             
-          }, time + 1000)
+          }, time + this.standByTime)
+    }
+    updateDirectionSignaling(){
+        //upon arrival, update indicator for 1 second for other users entering
+        let nextMovement = (this.queue[0]-this.currentFloor);
+        if (nextMovement !== 0){
+            let indicatorId = (nextMovement > 0) ? "green" : "red";
+            let indicator = document.getElementById(indicatorId)
+            indicator.style.opacity = 1;
+
+            setTimeout(() => {
+                //after transition time, set indicator off
+                indicator.style.opacity = 0.3;
+                
+            }, this.standByTime )
+        }
     }
     openDoors(){
         this.floorIndicator.style.color = "yellow";
@@ -117,16 +137,19 @@ class Elevator{
     }
 
 }
+// *End of Class* //
 
 
 
-// START //
+
+// START PROGRAM //
+
+//declare our elevator
 const elevator = new Elevator();
-
 
 //function to add to queue - triggered by panel buttons
 function toQueue(floor){
-    //check that the floor selected is not the current floor while it on standby
+    //check that the floor selected is not the current floor, or the one it departed from
     if (floor == elevator.getCurrentFloor()){
         console.log('This is the floor selected.');
         return

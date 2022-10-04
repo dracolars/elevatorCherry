@@ -6,7 +6,9 @@ body {
     background-color: aquamarine;
 }
 
+
 /* BUILDING */
+
 #building {
     height: 160em;
     transition-duration: 3s;
@@ -26,7 +28,9 @@ body {
     color: aliceblue;
 }
 
+
 /* CONTROL PANEL */
+
 #panel {
     height: 16em;
     width: 12em;
@@ -46,19 +50,16 @@ body {
     min-height: 4em;
     border-radius: 4px;
 }
-
 .screen-left {
     height: 7em;
     width: 60%;
 }
-
 
 #floor-indicator{
     color: white;
     text-align: center;
     font-size: 2.5em;
 }
-
 .screen-right {
     height: 7em;
     width: 40%;
@@ -83,9 +84,6 @@ body {
     margin-bottom: 1em;
     opacity: 0.3;
 }
-
-
-
 
 .buttons{
     margin-top: 1em;
