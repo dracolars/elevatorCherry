@@ -52,6 +52,7 @@ body {
     width: 50%;
     overflow: hidden;
     background-color: silver;
+    transform: translateX(50%)
 }
 
 .door-left{
@@ -61,6 +62,7 @@ body {
     border-top: 1em solid darkgray;
     overflow: hidden;
     background-color: silver;
+    transform: translateX(-50%)
 }
 
 
