@@ -38,7 +38,7 @@ body {
     position: absolute;
     margin: auto;
     background-color: silver;
-    top: 20em;
+    bottom: 0em;
     left: 35%;
     display: flex;
     border: 3px solid gray;
@@ -73,7 +73,7 @@ body {
     width: 12em;
     background-color: gainsboro;
     position: absolute;
-    top: 14em;
+    bottom: 10em;
     left: 4em;
     border: solid 1px black;
     border-radius: 4px;
