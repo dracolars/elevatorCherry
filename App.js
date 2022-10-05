@@ -116,20 +116,24 @@ class Elevator{
     }
     openDoors(){
         this.floorIndicator.style.color = "yellow";
-        this.doors.style.opacity = 1;
         this.doorLeft.style.transform = "translateX(-50%)";
         this.doorLeft.style.transitionDuration = 200 + "ms";
         this.doorRight.style.transform = "translateX(50%)";
         this.doorRight.style.transitionDuration = 200 + "ms";
+        this.doors.style.opacity = 1;
 
     }
     closeDoors(){
         this.floorIndicator.style.color = "white";
-        this.doors.style.opacity = 0.3;
         this.doorLeft.style.transform = "translateX(0)";
-        this.doorLeft.style.transitionDuration = 100 + "ms";
+        this.doorLeft.style.transitionDuration = 200 + "ms";
         this.doorRight.style.transform = "translateX(0)";
-        this.doorRight.style.transitionDuration = 100 + "ms";
+        this.doorRight.style.transitionDuration = 200 + "ms";
+        setTimeout(() => {
+            this.doors.style.opacity = 0.3;
+          }, 200)
+        
+       
     }
 
 }
